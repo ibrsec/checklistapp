@@ -348,7 +348,7 @@ console.log('resultItems = ', resultItems)
     }
   };
 
-  return { createChecklist, getChecklists, startDayApi,deleteChecklist,toggleStatusTask,editCheckList };
+  return { createChecklist, getAllDays, getChecklists, startDayApi,deleteChecklist,toggleStatusTask,editCheckList };
 };
 
 export default useChekclistApi;

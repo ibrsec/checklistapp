@@ -1,44 +1,49 @@
 "use client";
+import TableComp from "@/components/TableComp";
 import useChekclistApi from "@/helpers/useChekclistApi";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
- 
-
-
 const HistoryPage = () => {
+  let checklist = useSelector((state) => state.checklist.checklist);
+  let allChecklists = useSelector((state) => state.checklist.allDayCheckList);
+  console.log("checklist = from home = ", checklist);
+  const { getChecklists, deleteChecklist, toggleStatusTask, getAllDays } =
+    useChekclistApi();
+  useEffect(() => {
+    getChecklists();
+    getAllDays();
+  }, []);
 
-    let checklist = useSelector((state) => state.checklist.checklist);
-    console.log("checklist = from home = ", checklist);
-    const { getChecklists, deleteChecklist, toggleStatusTask } =
-      useChekclistApi();
-    useEffect(() => {
-      getChecklists();
-    }, []);
-  
-    const resultCheckList = [...checklist]?.sort(function (a, b) {
-      const hourA = a?.time.split(":")[0];
-      const hourB = b?.time.split(":")[0];
-      const minuteA = a?.time.split(":")[1];
-      const minuteB = b?.time.split(":")[1];
-      // compare hours first
-      if (hourA < hourB) return -1;
-      if (hourA > hourB) return 1;
-      // compare minutes next
-      if (minuteA < minuteB) return -1;
-      if (minuteA > minuteB) return 1;
-  
-      // couldn't break the tie
-      return 0;
-    });
-    console.log("resultCheckList====", resultCheckList);
-  
+  const resultCheckList = [...checklist]?.sort(function (a, b) {
+    const hourA = a?.time.split(":")[0];
+    const hourB = b?.time.split(":")[0];
+    const minuteA = a?.time.split(":")[1];
+    const minuteB = b?.time.split(":")[1];
+    // compare hours first
+    if (hourA < hourB) return -1;
+    if (hourA > hourB) return 1;
+    // compare minutes next
+    if (minuteA < minuteB) return -1;
+    if (minuteA > minuteB) return 1;
 
+    // couldn't break the tie
+    return 0;
+  });
+  console.log("resultCheckList====", resultCheckList);
+
+  // allChecklists.reverse();
+
+  console.log("allChecklists", allChecklists);
   return (
-    <div>
-        <h1 className="text-3xl text-slate-500">HistoryPage</h1>
-
-<table className="table border border-collapse">
+    <div className="mb-5 px-2">
+      <h1 className="text-3xl text-slate-500 text-center my-5">HistoryPage</h1>
+      <div className="flex flex-col gap-10 items-center justify-center ">
+      {allChecklists?.map((item) => (
+        <TableComp key={item?.id} checklist={item?.tasks} date={new Date(item?.date).toLocaleDateString('tr-TR')} />
+      ))}
+      </div>
+      {/* <table className="table border border-collapse">
         <thead>
           <tr>
             <th className="w-20 text-start">status</th>
@@ -68,24 +73,13 @@ const HistoryPage = () => {
                   Delete
                 </button>
               </td>
-              {/* <td>
-                <button
-                  className="py-1 px-2 bg-blue-500 text-white hover:bg-blue-400 active:bg-blue-600 rounded-md text-sm transition-all"
-                  onClick={() => {
-                    setEditBox(!editBox);
-                    setContentForEdit(item)
-                  }}
-                >
-                  {editBox && item?.id === contentForEdit?.id ? "Editting" : "Edit"}
-                </button>
-              </td> */}
+              
             </tr>
           ))}
         </tbody>
-      </table>
-
+      </table> */}
     </div>
-  )
-}
+  );
+};
 
-export default HistoryPage
+export default HistoryPage;
