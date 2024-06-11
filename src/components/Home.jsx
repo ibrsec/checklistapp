@@ -35,54 +35,68 @@ const HomePage = () => {
   const [contentForEdit, setContentForEdit] = useState({});
 
   return (
-    <div>
-      <table className="table border border-collapse">
-        <thead>
-          <tr>
-            <th className="w-20 text-start">status</th>
-            <th className="w-80 text-start">name</th>
-            <th className="w-40 text-start">time</th>
-          </tr>
-        </thead>
-        <tbody className="border">
-          {resultCheckList?.map((item) => (
-            <tr key={item?.id} className="table-row">
-              <td>
-                <input
-                  type="checkbox"
-                  name=""
-                  id=""
-                  checked={item?.status}
-                  onChange={() => toggleStatusTask(item?.id)}
-                />
-              </td>
-              <td>{item?.name}</td>
-              <td>{item?.time}</td>
-              <td>
-                <button
-                  className="py-1 px-2 bg-red-500 text-white hover:bg-red-400 active:bg-red-600 rounded-md text-sm transition-all"
-                  onClick={() => deleteChecklist(item?.id)}
-                >
-                  Delete
-                </button>
-              </td>
-              <td>
-                <button
-                  className="py-1 px-2 bg-blue-500 text-white hover:bg-blue-400 active:bg-blue-600 rounded-md text-sm transition-all"
-                  onClick={() => {
-                    setEditBox(!editBox);
-                    setContentForEdit(item)
-                  }}
-                >
-                  {editBox && item?.id === contentForEdit?.id ? "Editting" : "Edit"}
-                </button>
-              </td>
+    <div className="px-2 py-5 ">
+      {checklist.length > 0 ? (
+        <table className="table border border-collapse">
+          <thead>
+            <tr>
+              <th className="w-20 text-start">status</th>
+              <th className="w-80 text-start">name</th>
+              <th className="w-40 text-start">time</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <CreateNewComp editBox={editBox} setEditBox={setEditBox} contentForEdit={contentForEdit} />
-      <StartApiButton />
+          </thead>
+          <tbody className="border">
+            {resultCheckList?.map((item) => (
+              <tr key={item?.id} className="table-row">
+                <td>
+                  <input
+                    type="checkbox"
+                    name=""
+                    id=""
+                    checked={item?.status}
+                    onChange={() => toggleStatusTask(item?.id)}
+                  />
+                </td>
+                <td>{item?.name}</td>
+                <td>{item?.time}</td>
+                <td>
+                  <button
+                    className="py-1 px-2 bg-red-500 text-white hover:bg-red-400 active:bg-red-600 rounded-md text-sm transition-all"
+                    onClick={() => deleteChecklist(item?.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="py-1 px-2 bg-blue-500 text-white hover:bg-blue-400 active:bg-blue-600 rounded-md text-sm transition-all"
+                    onClick={() => {
+                      setEditBox(!editBox);
+                      setContentForEdit(item);
+                    }}
+                  >
+                    {editBox && item?.id === contentForEdit?.id
+                      ? "Editting"
+                      : "Edit"}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="text-center my-4">
+          <h4 className="text-xl text-center text-red-400 my-3">
+            You need to start the day !!
+          </h4>
+          <StartApiButton />
+        </div>
+      )}
+      <CreateNewComp
+        editBox={editBox}
+        setEditBox={setEditBox}
+        contentForEdit={contentForEdit}
+      />
     </div>
   );
 };

@@ -64,7 +64,9 @@ const useChekclistApi = () => {
           max = current;
         }
         return max;
-      }, allDays[0])?.tasks,
+      }, allDays[0])?.tasks.map(item=> ({
+        ...item,status:false
+      })),
     };
 
     // const body = {
@@ -332,12 +334,14 @@ const useChekclistApi = () => {
         console.log("date from get loop=", date);
 
         if (today === date) {
+          console.log("return item worked");
           return item;
         }
-      })[0];
+      });
 
-      console.log("result from get api", result);
-      dispatch(successgetDatas(result?.tasks));
+const resultItems = result.length> 0 ? result[0]?.tasks : [];
+console.log('resultItems = ', resultItems)
+      dispatch(successgetDatas(resultItems));
     } catch (error) {
       dispatch(fetchFailEnd());
       console.log(error);
