@@ -1,10 +1,11 @@
+import useChekclistApi from "@/helpers/useChekclistApi";
 
 
 
 const TableComp = ({checklist,date}) => {
  
     console.log("checklist = from comp = ",date, checklist);
-    
+
   
     const resultCheckList = [...checklist]?.sort(function (a, b) {
       const hourA = a?.time.split(":")[0];
@@ -38,26 +39,26 @@ const TableComp = ({checklist,date}) => {
         </thead>
         <tbody className="border">
           {resultCheckList?.map((item) => (
-            <tr key={item?.id} className="table-row">
+            <tr key={item?.id} className="table-row hover:bg-slate-300 transition-all ">
               <td>
                 <input
                   type="checkbox"
-                  name=""
-                  id=""
+                  name={`label-${item?.id}`}
+                  id={`label-${item?.id}`}
                   checked={item?.status}
-                  onChange={() => toggleStatusTask(item?.id)}
+                  // onChange={() => toggleStatusTask(item?.id)}
                 />
               </td>
-              <td>{item?.name}</td>
-              <td>{item?.time}</td>
-              <td>
+              <td><label  htmlFor={`label-${item?.id}`}>{item?.name}</label></td>
+              <td><label  htmlFor={`label-${item?.id}`}>{item?.time}</label></td>
+              {/* <td>
                 <button
                   className="py-1 px-2 bg-red-500 text-white hover:bg-red-400 active:bg-red-600 rounded-md text-sm transition-all"
-                  onClick={() => deleteChecklist(item?.id)}
+                  // onClick={() => deleteChecklist(item?.id)}
                 >
                   Delete
                 </button>
-              </td>
+              </td> */}
               {/* <td>
                 <button
                   className="py-1 px-2 bg-blue-500 text-white hover:bg-blue-400 active:bg-blue-600 rounded-md text-sm transition-all"

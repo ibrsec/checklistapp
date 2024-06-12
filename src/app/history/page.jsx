@@ -33,13 +33,21 @@ const HistoryPage = () => {
   console.log("resultCheckList====", resultCheckList);
 
   // allChecklists.reverse();
+  const resultAllChecklists = allChecklists.length > 0 ? [...allChecklists].sort(function (a, b) {
+    const dateA = new Date(a?.date).toLocaleDateString('tr-TR');
+    const dateB = new Date(b?.date).toLocaleDateString('tr-TR');
+    if (dateA < dateB) return 1;
+    if (dateA > dateB) return -1;
+    return 0;
+  }) : [];
+  console.log('resultAllChecklists', resultAllChecklists)
 
   console.log("allChecklists", allChecklists);
   return (
     <div className="mb-5 px-2">
       <h1 className="text-3xl text-slate-500 text-center my-5">HistoryPage</h1>
       <div className="flex flex-col gap-10 items-center justify-center ">
-      {allChecklists?.map((item) => (
+      {resultAllChecklists?.map((item) => (
         <TableComp key={item?.id} checklist={item?.tasks} date={new Date(item?.date).toLocaleDateString('tr-TR')} />
       ))}
       </div>

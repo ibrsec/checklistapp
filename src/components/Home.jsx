@@ -35,9 +35,16 @@ const HomePage = () => {
   const [contentForEdit, setContentForEdit] = useState({});
 
   return (
-    <div className="px-2 py-5 ">
+    <div className="px-2 py-5  my-5">
+      <CreateNewComp
+        editBox={editBox}
+        setEditBox={setEditBox}
+        contentForEdit={contentForEdit}
+      />
+
+      
       {checklist.length > 0 ? (
-        <table className="table border border-collapse">
+        <table className="table border border-collapse mx-auto p-2 my-5">
           <thead>
             <tr>
               <th className="w-20 text-start">status</th>
@@ -47,18 +54,19 @@ const HomePage = () => {
           </thead>
           <tbody className="border">
             {resultCheckList?.map((item) => (
-              <tr key={item?.id} className="table-row">
+              <tr key={item?.id} className="table-row hover:bg-slate-300 transition-all ">
                 <td>
                   <input
                     type="checkbox"
-                    name=""
-                    id=""
+                    name={`label-${item?.id}`}
+                    id={`label-${item?.id}`}
                     checked={item?.status}
                     onChange={() => toggleStatusTask(item?.id)}
+                    className="cursor-pointer"
                   />
                 </td>
-                <td>{item?.name}</td>
-                <td>{item?.time}</td>
+                <td><label className="cursor-pointer" htmlFor={`label-${item?.id}`}>{item?.name}</label></td>
+                <td><label className="cursor-pointer" htmlFor={`label-${item?.id}`}>{item?.time}</label></td>
                 <td>
                   <button
                     className="py-1 px-2 bg-red-500 text-white hover:bg-red-400 active:bg-red-600 rounded-md text-sm transition-all"
@@ -92,11 +100,7 @@ const HomePage = () => {
           <StartApiButton />
         </div>
       )}
-      <CreateNewComp
-        editBox={editBox}
-        setEditBox={setEditBox}
-        contentForEdit={contentForEdit}
-      />
+      
     </div>
   );
 };

@@ -15,9 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useChekclistApi = () => {
   const dispatch = useDispatch();
+  // const baseUrl = "https://66619da963e6a0189feabf2c.mockapi.io/checklist"
+  const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
 
   const getAllDays = async () => {
-    const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist`;
+    // const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist`;
+    const url = baseUrl;
     try {
       dispatch(fethStart());
       const response = await fetch(url);
@@ -36,7 +39,8 @@ const useChekclistApi = () => {
   };
 
   const startDayApi = async () => {
-    const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist`;
+    // const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist`;
+    const url = baseUrl;
     const allDays = await getAllDays();
     console.log("allDays", allDays);
     const dates = allDays?.map((item) => {
@@ -137,7 +141,9 @@ const useChekclistApi = () => {
     if (!id) {
       console.log("First you must start the day!");
     }
-    const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    // const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    const url = `${baseUrl}/${id}`;
+
 
     const lastBody = {
       tasks: [
@@ -185,7 +191,8 @@ const useChekclistApi = () => {
     if (!id) {
       console.log("First you must start the day!");
     }
-    const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    // const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    const url = `${baseUrl}/${id}`;
 
     const lastBody = {
       tasks: [
@@ -232,7 +239,8 @@ const useChekclistApi = () => {
     if (!id) {
       console.log("First you must start the day!");
     }
-    const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    // const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    const url = `${baseUrl}/${id}`;
 
     const existTasks = allDays?.filter((item) => item?.id === id)[0]?.tasks;
     const lastBody = {
@@ -280,7 +288,8 @@ const useChekclistApi = () => {
     if (!id) {
       console.log("First you must start the day!");
     }
-    const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    // const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist/${id}`;
+    const url = `${baseUrl}/${id}`;
 
     const existTasks = allDays?.filter((item) => item?.id === id)[0]?.tasks;
     const lastBody = {
@@ -313,7 +322,8 @@ const useChekclistApi = () => {
   };
 
   const getChecklists = async () => {
-    const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist`;
+    // const url = `https://66619da963e6a0189feabf2c.mockapi.io/checklist`;
+    const url = baseUrl;
     try {
       dispatch(fethStart());
       const response = await fetch(url, { cache: "no-store" });

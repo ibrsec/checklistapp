@@ -2,14 +2,14 @@
 import useChekclistApi from "@/helpers/useChekclistApi";
 import React, { useEffect, useState } from "react";
 
-const CreateNewComp = ({editBox,setEditBox,contentForEdit}) => {
-  const { createChecklist,editCheckList } = useChekclistApi();
+const CreateNewComp = ({ editBox, setEditBox, contentForEdit }) => {
+  const { createChecklist, editCheckList } = useChekclistApi();
   const [inputName, setInputName] = useState("");
   const [inputTime, setInputTime] = useState("");
-  useEffect(()=>{
+  useEffect(() => {
     setInputName(editBox ? contentForEdit.name : "");
     setInputTime(editBox ? contentForEdit.time : "");
-  },[editBox])
+  }, [editBox]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,9 +34,6 @@ const CreateNewComp = ({editBox,setEditBox,contentForEdit}) => {
       return;
     }
 
-    
-
-
     const isNumber = (char) => {
       let result = false;
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].forEach((item) => {
@@ -47,18 +44,17 @@ const CreateNewComp = ({editBox,setEditBox,contentForEdit}) => {
       return result;
     };
 
-
     if (
-      !(isNumber(inputTime[0]) &&
-      isNumber(inputTime[1]) &&
-      isNumber(inputTime[3]) &&
-      isNumber(inputTime[4]))
+      !(
+        isNumber(inputTime[0]) &&
+        isNumber(inputTime[1]) &&
+        isNumber(inputTime[3]) &&
+        isNumber(inputTime[4])
+      )
     ) {
       alert("=> format should be : 00:00");
       return;
     }
-
-
 
     const body = {
       name: inputName,
@@ -72,42 +68,47 @@ const CreateNewComp = ({editBox,setEditBox,contentForEdit}) => {
       time: inputTime,
     };
     console.log(bodyEdit);
-    
-    
-    editBox ? editCheckList(contentForEdit?.id,body) : createChecklist(body);
+
+    editBox ? editCheckList(contentForEdit?.id, body) : createChecklist(body);
     editBox && setEditBox(false);
     setInputName("");
     setInputTime("");
   };
   return (
     <div>
-      <form action="" onSubmit={handleSubmit}>
-        <div>
-          <input
-            className="border m-3 p-2"
-            type="text"
-            name="inputName"
-            id="inputName"
-            value={inputName}
-            onChange={(e) => setInputName(e.target.value)}
-            placeholder="Name"
-          />
+      <form
+        action=""
+        onSubmit={handleSubmit}
+        className="flex flex-col  items-center justify-center gap-3"
+      >
+        <div className="flex items-center justify-center gap-3 flex-wrap">
+          <div>
+            <input
+              className="border m-3 p-2 w-"
+              type="text"
+              name="inputName"
+              id="inputName"
+              value={inputName}
+              onChange={(e) => setInputName(e.target.value)}
+              placeholder="Name"
+            />
+          </div>
+          <div>
+            <input
+              className="border m-3 p-2"
+              type="text"
+              name="inputTime"
+              id="inputTime"
+              value={inputTime}
+              onChange={(e) => setInputTime(e.target.value)}
+              placeholder="time - 00:00"
+            />
+          </div>
         </div>
-        <div>
-          <input
-            className="border m-3 p-2"
-            type="text"
-            name="inputTime"
-            id="inputTime"
-            value={inputTime}
-            onChange={(e) => setInputTime(e.target.value)}
-            placeholder="time - 00:00"
-          />
-        </div>
-        <div>
+        <div className="w-[300px]">
           <button
             type="submit"
-            className="py-2 px-5 bg-slate-400 text-slate-800 rounded-lg "
+            className="py-2 px-5 w-full bg-slate-400 text-slate-800 rounded-lg "
           >
             {editBox ? "Edit" : "Add new checklist"}
           </button>
