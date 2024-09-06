@@ -195,7 +195,7 @@ checklistapp  (folder)
  <!-- <img src="https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white">  -->
  <!-- <img src="https://img.shields.io/badge/axios-CC6699?style=for-the-badge&logo=axios&logoColor=white">  -->
  <!-- <img src="https://img.shields.io/badge/context_api-AB4BFE?style=for-the-badge&logo=context&logoColor=FFC920">  -->
- <!-- <img src="https://img.shields.io/badge/redux-AB4BFE?style=for-the-badge&logo=redux&logoColor=FFC920">  -->
+ <img src="https://img.shields.io/badge/redux-AB4BFE?style=for-the-badge&logo=redux&logoColor=FFC920"> 
 
  <!-- <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">  -->
  <!-- <img src="https://img.shields.io/badge/swal_alert2-CA4245?style=for-the-badge&logo=swal-alert2&logoColor=white">  -->
